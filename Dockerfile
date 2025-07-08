@@ -1,24 +1,24 @@
-# Use an official JDK image
 FROM openjdk:21
-
-# Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
+# Copy Maven wrapper files
 COPY .mvn .mvn
 COPY mvnw .
 COPY pom.xml .
 
+# ✅ Give execute permission to the Maven wrapper
+RUN chmod +x mvnw
+
 # Download dependencies
 RUN ./mvnw dependency:go-offline
 
-# Copy rest of the code
+# Copy source code
 COPY src src
 
-# Package the app
+# Build the project
 RUN ./mvnw clean package -DskipTests
 
-# Expose port 8080
+# Expose port
 EXPOSE 8080
 
 # Run the app
