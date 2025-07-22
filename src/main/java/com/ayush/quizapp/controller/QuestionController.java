@@ -15,17 +15,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/question")
 public class QuestionController {
 
-    private final QuestionService questionService;
+
     @Autowired
     private QuestionDao questionDao;
-
     @Autowired
     private QuizDao quizDao;
-
     @Autowired
-    public QuestionController(QuestionService questionService) {
-        this.questionService = questionService;
-    }
+    private QuestionService questionService;
+
+
+
 
     // 1. Fetch all questions
     @GetMapping("/allQuestions")
